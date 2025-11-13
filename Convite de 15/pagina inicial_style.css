@@ -1,0 +1,236 @@
+/* ---------------------- GERAL ---------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  color: #222;
+  background-color: #fff;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 60px;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  border-bottom: 1px solid #eee;
+}
+
+header nav {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+header a {
+  font-weight: 500;
+  color: #333;
+}
+
+.btn-login {
+  background-color: #ff5c70;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 5px;
+}
+
+/* ---------------------- HERO ---------------------- */
+.hero {
+  margin-top: 70px;
+  background-image: url('./imgs/debutante.png');
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.hero button {
+  background-color: #ff5c70;
+  border: none;
+  padding: 10px 25px;
+  color: white;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.hero button:hover {
+  background-color: #ff7688;
+}
+
+/* ---------------------- SEÇÃO SERVIÇOS ---------------------- */
+.servicos {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 80px 60px;
+  gap: 40px;
+}
+
+.servicos-texto {
+  flex: 1;
+}
+
+.servicos-texto h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.servicos-texto h3 {
+  font-size: 1rem;
+  margin-top: 20px;
+}
+
+.servicos-texto p {
+  color: #555;
+  font-size: 0.95rem;
+  margin-top: 8px;
+}
+
+.servicos img {
+  flex: 1;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.modelos {
+  padding: 60px;
+}
+
+.modelos h2 {
+  font-size: 1.8rem;
+  margin-bottom: 25px;
+}
+
+.grid-modelos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+
+.card-modelo {
+  background: #fafafa;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+.card-modelo:hover {
+  transform: translateY(-5px);
+}
+
+.card-modelo-info {
+  padding: 15px;
+}
+
+.card-modelo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 10px 10px 0 0;
+  margin-bottom: 0;
+}
+
+.card-modelo h4 {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.card-modelo p {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.contatos {
+  background-color: #f6f6f6;
+  padding: 60px;
+}
+
+.contatos h2 {
+  font-size: 1.6rem;
+  margin-bottom: 25px;
+}
+
+footer {
+  background-color: #fff;
+  padding: 40px 60px;
+  display: flex;
+  justify-content: left;
+  gap: 30px;
+  align-items: center;
+  flex-wrap: nowrap;
+  border-top: 1px solid #eee;
+}
+
+footer .coluna {
+  min-width: 150px;
+}
+
+footer .coluna h4 {
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  color: #222;
+}
+
+footer .coluna a {
+  display: block;
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 5px;
+}
+
+footer .social a {
+  margin-right: 10px;
+  color: #555;
+  font-size: 1.1rem;
+}
+
+/* ---------------------- RESPONSIVIDADE ---------------------- */
+@media (max-width: 768px) {
+  .servicos {
+    flex-direction: column;
+  }
+
+  header {
+    padding: 15px 25px;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .modelos, .contatos {
+    padding: 40px 25px;
+  }
+}
