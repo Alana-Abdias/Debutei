@@ -57,7 +57,7 @@ header a {
 /* ---------------------- HERO ---------------------- */
 .hero {
   margin-top: 70px;
-  background-image: url('./imgs/debutante.png');
+  background-image: url('debutante.png');
   height: 450px;
   display: flex;
   flex-direction: column;
