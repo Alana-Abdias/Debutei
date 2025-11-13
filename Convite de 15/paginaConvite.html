@@ -2,21 +2,21 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Convite 15 anos - Alice</title>
+  <title>Convite - Debutante</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <link rel="stylesheet" href="paginaConvite.css">
-  <script src="loginLógica.js" defer></script>
 </head>
 
 <body>
   <button class="hero-edit-btn">Editar convite</button>
-    <header class="hero">
-      <div class="hero-content">
-        <h1 class="hero-title">ALICE</h1>
-        <p class="hero-subtitle">Venha comemorar meus 15 anos</p>
-      </div>
-    </header>
+
+  <header class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">NOME DA DEBUTANTE</h1>
+      <p class="hero-subtitle">Venha comemorar meus 15 anos</p>
+    </div>
+  </header>
 
   <section class="local-section">
     <div class="local-image">
@@ -26,15 +26,14 @@
     <div class="local-text">
       <h2 class="section-title">Local</h2>
       <p>
-        A festa ocorrerá no SALÃO DE FESTAS FORKS, localizado na Av. Santos Paiva, número 51. Um ambiente elegante e vibrante, que contará com uma decoração especial e atrações imperdíveis, da debutante para você!
-      </p>
+        A festa ocorrerá em um local muito especial! Essas informações foram definidas pela debutante 💖
       </p>
     </div>
   </section>
 
   <section class="date-section">
-    <div class="date-main">21/11/2025</div>
-    <div class="date-sub">21h às 2h</div>
+    <div class="date-main">DATA</div>
+    <div class="date-sub">HORÁRIO</div>
   </section>
 
   <section class="rsvp-section">
@@ -66,5 +65,33 @@
 
   <footer></footer>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const infoRaw = localStorage.getItem('infoConvite');
+      if (!infoRaw) return;
+
+      const info = JSON.parse(infoRaw) || {};
+
+      const heroTitle = document.querySelector('.hero-title');
+      if (heroTitle && info.name) {
+        heroTitle.textContent = info.name;
+      }
+
+      const sectionTitle = document.querySelector('.section-title');
+      if (sectionTitle && info.location) {
+        sectionTitle.textContent = info.location;
+      }
+
+      const dateMain = document.querySelector('.date-main');
+      if (dateMain && info.date) {
+        dateMain.textContent = info.date;
+      }
+
+      const dateSub = document.querySelector('.date-sub');
+      if (dateSub && info.time) {
+        dateSub.textContent = info.time;
+      }
+    });
+  </script>
 </body>
 </html>

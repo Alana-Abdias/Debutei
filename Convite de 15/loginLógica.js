@@ -1,27 +1,54 @@
-document.getElementById('loginForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  // Pega os dados do formulário
-  const form = e.target;
-  const infoConvite = {
-    name: form.name.value,
-    date: form.date.value,
-    time: form.time.value,
-    location: form.location.value,
-    email: form.email.value
-  };
-  // Salva os dados no armazenamento local
-  localStorage.setItem('infoConvite', JSON.stringify(infoConvite));
-  // Redireciona para a página do convite
-  window.location = 'paginaConvite.html';
+// script.js
+
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('script.js carregado!');
+
+  // ===============================
+  // PÁGINA DE LOGIN
+  // ===============================
+  const btnModelos = document.getElementById('btnModelos');
+
+  if (btnModelos) {
+    btnModelos.addEventListener('click', () => {
+      console.log('Clique em "Escolher modelos"');
+
+      const infoConvite = {
+        name: document.getElementById('nome').value.trim(),
+        date: document.getElementById('data').value.trim(),
+        time: document.getElementById('horario').value.trim(),
+        location: document.getElementById('local').value.trim(),
+        email: document.getElementById('email').value.trim()
+      };
+
+      console.log('Salvando no localStorage:', infoConvite);
+
+      // Salva no localStorage
+      localStorage.setItem('infoConvite', JSON.stringify(infoConvite));
+
+      // Redireciona para a página do convite
+      window.location.href = 'paginaConvite.html';
+    });
+  }
+
+  // ===============================
+  // PÁGINA DO CONVITE
+  // ===============================
+  const infoRaw = localStorage.getItem('infoConvite');
+
+  if (infoRaw) {
+    const info = JSON.parse(infoRaw);
+    console.log('Dados carregados na página do convite:', info);
+
+    const heroTitle = document.querySelector('.hero-title');
+    if (heroTitle && info.name) heroTitle.textContent = info.name;
+
+    const sectionTitle = document.querySelector('.section-title');
+    if (sectionTitle && info.location) sectionTitle.textContent = info.location;
+
+    const dateMain = document.querySelector('.date-main');
+    if (dateMain && info.date) dateMain.textContent = info.date;
+
+    const dateSub = document.querySelector('.date-sub');
+    if (dateSub && info.time) dateSub.textContent = info.time;
+  }
 });
-
-window.onload = function() {
-  // Pega as informações salvas do usuário
-  const info = JSON.parse(localStorage.getItem('infoConvite')) || {};
-
-  // Preenche a página do convite com as informações
-  document.getElementById('hero-title').textContent = info.name || '';
-  document.getElementById('section-title').textContent = info.location || '';
-  document.getElementById('date-main').textContent = info.date || '';
-  document.getElementById('date-sub').textContent = info.time || '';
-};

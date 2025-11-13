@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Debutei</title>
   <link rel="stylesheet" href="paginaLogin.css" />
-  <script src="loginLógica.js" defer></script>
 </head>
 <body>
   <div class="container">
@@ -15,33 +14,60 @@
     <form id="loginForm">
       <div class="form-group">
         <label for="nome">Nome Completo da debutante</label>
-        <input type="text" id="nome" placeholder="Alice" />
+        <input type="text" id="nome" name="name" placeholder="Alice" required />
       </div>
 
       <div class="form-group">
         <label for="data">Data do evento</label>
-        <input type="text" id="data" placeholder="xx/xx/xx" />
+        <input type="text" id="data" name="date" placeholder="xx/xx/xx" required />
       </div>
 
       <div class="form-group">
         <label for="horario">Horário</label>
-        <input type="text" id="horario" placeholder="12:00" />
+        <input type="text" id="horario" name="time" placeholder="12:00" required />
       </div>
 
       <div class="form-group">
         <label for="local">Local</label>
-        <input type="text" id="local" placeholder="Loc." />
+        <input type="text" id="local" name="location" placeholder="Loc." required />
       </div>
 
       <div class="form-group full">
         <label for="email">Email</label>
-        <input type="email" id="email" placeholder="alice@gmail.com" />
+        <input type="email" id="email" name="email" placeholder="alice@gmail.com" required />
       </div>
 
-      <button class="btn" type="submit">
-         <a href="paginaConvite.html" style="text-decoration: none; color: white;">Escolher modelos</a>
-      </button>
+      <!-- Voltamos para o <a>, que você já sabe que navega certinho -->
+      <a href="paginaConvite.html" id="linkModelos" class="btn" style="text-decoration: none; color: white; display: inline-block; text-align: center;">
+        Criar modelo de convite
+      </a>
     </form>
   </div>
+
+  <!-- Script específico desta página -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const linkModelos = document.getElementById('linkModelos');
+
+      if (linkModelos) {
+        linkModelos.addEventListener('click', function() {
+          // Coletar os valores dos inputs
+          const infoConvite = {
+            name: document.getElementById('nome').value.trim(),
+            date: document.getElementById('data').value.trim(),
+            time: document.getElementById('horario').value.trim(),
+            location: document.getElementById('local').value.trim(),
+            email: document.getElementById('email').value.trim()
+          };
+
+          // Salvar no localStorage
+          localStorage.setItem('infoConvite', JSON.stringify(infoConvite));
+
+          // NÃO damos preventDefault aqui → o <a> navega normalmente
+          // Se o JS não rodar por algum motivo, ainda assim navega.
+        });
+      }
+    });
+  </script>
 </body>
 </html>
