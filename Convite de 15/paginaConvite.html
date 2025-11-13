@@ -6,41 +6,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <link rel="stylesheet" href="paginaConvite.css">
+
+  <!-- jsPDF + html2canvas via CDN para gerar PDF a partir do HTML -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 
 <body>
   <button class="hero-edit-btn">Editar convite</button>
 
-  <header class="hero">
-    <div class="hero-content">
-      <h1 class="hero-title">NOME DA DEBUTANTE</h1>
-      <p class="hero-subtitle">Venha comemorar meus 15 anos</p>
-    </div>
-  </header>
+  <!-- 🔹 TUDO que queremos no PDF fica dentro desse wrapper -->
+  <div id="convite">
+    <header class="hero">
+      <div class="hero-content">
+        <h1 class="hero-title">NOME DA DEBUTANTE</h1>
+        <p class="hero-subtitle">Venha comemorar meus 15 anos</p>
+      </div>
+    </header>
 
-  <section class="local-section">
-    <div class="local-image">
-      <img src="image2.png" alt="Foto do salão de festas">
-    </div>
+    <section class="local-section">
+      <div class="local-image">
+        <img src="image2.png" alt="Foto do salão de festas">
+      </div>
 
-    <div class="local-text">
-      <h2 class="section-title">Local</h2>
-      <p>
-        A festa ocorrerá em um local muito especial! Essas informações foram definidas pela debutante 💖
-      </p>
-    </div>
-  </section>
+      <div class="local-text">
+        <h2 class="section-title">Local</h2>
+        <p>
+          A festa ocorrerá em um local muito especial! Essas informações foram definidas pela debutante 💖
+        </p>
+      </div>
+    </section>
 
-  <section class="date-section">
-    <div class="date-main">DATA</div>
-    <div class="date-sub">HORÁRIO</div>
-  </section>
+    <section class="date-section">
+      <div class="date-main">DATA</div>
+      <div class="date-sub">HORÁRIO</div>
+    </section>
+  </div>
+  <!-- 🔹 FIM DO CONVITE (essa parte vai pro PDF) -->
 
+  <!-- Form de confirmação de presença fica fora, não entra no PDF -->
   <section class="rsvp-section">
     <div class="rsvp-wrapper">
       <h2 class="rsvp-title">Confirme a sua presença</h2>
 
-      <form>
+      <form id="rsvpForm">
         <div class="rsvp-form-group">
           <label class="rsvp-label" for="nome">Nome completo</label>
           <input class="rsvp-input" type="text" id="nome" placeholder="Insira aqui" required>
@@ -67,10 +76,15 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      // ===============================
+      // Preencher o convite com os dados salvos
+      // ===============================
       const infoRaw = localStorage.getItem('infoConvite');
-      if (!infoRaw) return;
+      let info = {};
 
-      const info = JSON.parse(infoRaw) || {};
+      if (infoRaw) {
+        info = JSON.parse(infoRaw) || {};
+      }
 
       const heroTitle = document.querySelector('.hero-title');
       if (heroTitle && info.name) {
@@ -90,6 +104,52 @@
       const dateSub = document.querySelector('.date-sub');
       if (dateSub && info.time) {
         dateSub.textContent = info.time;
+      }
+
+      // ===============================
+      // RSVP: gerar PDF igual ao convite
+      // ===============================
+      const rsvpForm = document.getElementById('rsvpForm');
+
+      if (rsvpForm) {
+        rsvpForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+
+          const guestName = document.getElementById('nome').value.trim();
+
+          // Pega o elemento que representa o convite
+          const conviteElement = document.getElementById('convite');
+
+          if (!conviteElement) {
+            alert('Não foi possível encontrar o convite para gerar o PDF.');
+            return;
+          }
+
+          const { jsPDF } = window.jspdf;
+
+          // Usa html2canvas internamente para renderizar o HTML com CSS
+          html2canvas(conviteElement, { scale: 2 }).then(canvas => {
+            const imgData = canvas.toDataURL('image/png');
+
+            // A4 em pontos (pt): 595.28 x 841.89 (aprox.)
+            const pdf = new jsPDF('p', 'pt', 'a4');
+
+            const pageWidth = pdf.internal.pageSize.getWidth();
+            const pageHeight = pdf.internal.pageSize.getHeight();
+
+            const imgWidth = pageWidth;
+            const imgHeight = canvas.height * imgWidth / canvas.width;
+
+            let position = 0;
+            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+
+            const debutName = info.name || 'debutante';
+            const safeDebutName = debutName.replace(/\s+/g, '_');
+            const safeGuestName = (guestName || 'convidado').replace(/\s+/g, '_');
+
+            pdf.save(`convite_${safeDebutName}_${safeGuestName}.pdf`);
+          });
+        });
       }
     });
   </script>
