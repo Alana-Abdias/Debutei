@@ -3,9 +3,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   console.log('script.js carregado!');
 
-  // ===============================
-  // PÁGINA DE LOGIN
-  // ===============================
+  // Página de login
   const btnModelos = document.getElementById('btnModelos');
 
   if (btnModelos) {
@@ -22,17 +20,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
       console.log('Salvando no localStorage:', infoConvite);
 
-      // Salva no localStorage
+      // Salva no armazenamento local
       localStorage.setItem('infoConvite', JSON.stringify(infoConvite));
 
       // Redireciona para a página do convite
       window.location.href = 'paginaConvite.html';
     });
   }
-
-  // ===============================
-  // PÁGINA DO CONVITE
-  // ===============================
+  
+  // Página do convite
   const infoRaw = localStorage.getItem('infoConvite');
 
   if (infoRaw) {

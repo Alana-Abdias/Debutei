@@ -37,7 +37,7 @@
         <input type="email" id="email" name="email" placeholder="alice@gmail.com" required />
       </div>
 
-      <!-- Voltamos para o <a>, que você já sabe que navega certinho -->
+      <!-- Voltamos para o <a> que navega direito -->
       <a href="paginaConvite.html" id="linkModelos" class="btn" style="text-decoration: none; color: white; display: inline-block; text-align: center;">
         Criar modelo de convite
       </a>
@@ -60,11 +60,8 @@
             email: document.getElementById('email').value.trim()
           };
 
-          // Salvar no localStorage
+          // Salva no armazenamento local
           localStorage.setItem('infoConvite', JSON.stringify(infoConvite));
-
-          // NÃO damos preventDefault aqui → o <a> navega normalmente
-          // Se o JS não rodar por algum motivo, ainda assim navega.
         });
       }
     });

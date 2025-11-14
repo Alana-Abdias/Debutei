@@ -7,7 +7,6 @@
 
   <link rel="stylesheet" href="paginaConvite.css">
 
-  <!-- jsPDF + html2canvas via CDN para gerar PDF a partir do HTML -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
@@ -15,7 +14,7 @@
 <body>
   <button class="hero-edit-btn">Editar convite</button>
 
-  <!-- 🔹 TUDO que queremos no PDF fica dentro desse wrapper -->
+<!-- TUDO que queremos no PDF fica aqui --> -->
   <div id="convite">
     <header class="hero">
       <div class="hero-content">
@@ -42,9 +41,8 @@
       <div class="date-sub">HORÁRIO</div>
     </section>
   </div>
-  <!-- 🔹 FIM DO CONVITE (essa parte vai pro PDF) -->
 
-  <!-- Form de confirmação de presença fica fora, não entra no PDF -->
+  <!-- Form para confirmação de presença que não entra no PDF -->
   <section class="rsvp-section">
     <div class="rsvp-wrapper">
       <h2 class="rsvp-title">Confirme a sua presença</h2>
@@ -76,9 +74,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // ===============================
-      // Preencher o convite com os dados salvos
-      // ===============================
+      // Insere os dados salvos no convite 
       const infoRaw = localStorage.getItem('infoConvite');
       let info = {};
 
@@ -106,9 +102,7 @@
         dateSub.textContent = info.time;
       }
 
-      // ===============================
-      // RSVP: gerar PDF igual ao convite
-      // ===============================
+      // Gerar PDF parecido com o convite
       const rsvpForm = document.getElementById('rsvpForm');
 
       if (rsvpForm) {
