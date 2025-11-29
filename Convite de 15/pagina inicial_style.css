@@ -1,4 +1,4 @@
-/* ---------------------- GERAL ---------------------- */
+
 * {
   margin: 0;
   padding: 0;
@@ -54,7 +54,7 @@ header a {
   border-radius: 5px;
 }
 
-/* ---------------------- HERO ---------------------- */
+/* Imagem de fundo da menina na festa */
 .hero {
   margin-top: 70px;
   background-image: url('debutante.png');
@@ -88,7 +88,7 @@ header a {
   background-color: #ff7688;
 }
 
-/* ---------------------- SEÇÃO SERVIÇOS ---------------------- */
+/* Texto sobre serviços*/
 .servicos {
   display: flex;
   justify-content: space-between;
@@ -216,7 +216,7 @@ footer .social a {
   font-size: 1.1rem;
 }
 
-/* ---------------------- RESPONSIVIDADE ---------------------- */
+/* Responsividade da tela */
 @media (max-width: 768px) {
   .servicos {
     flex-direction: column;
